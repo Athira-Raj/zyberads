@@ -1,8 +1,40 @@
-<form action="https://formsubmit.co/athiraraj.pt1@gmail.com" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="tel" name="phone" placeholder="Your Phone" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+
+    <form id="contactForm">
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevents the page from refreshing
+
+        fetch("https://script.google.com/macros/s/AKfycbzCslg9PpcZFp5MhSnhzVE7TH3zyoCUw_QvLNbXVToQHZ6b58XarhMLFTDKZrRecrCu/exec", { // Replace with your actual script URL
+            method: "POST",
+            mode: "no-cors", // Avoids CORS issues
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                message: document.getElementById("message").value
+            })
+        })
+        .then(() => alert("Form submitted successfully!")) // Shows success message
+        .catch(error => alert("Error: " + error)); // Shows error message
+    });
+    </script>
+
+</body>
+</html>
